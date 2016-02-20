@@ -1,0 +1,57 @@
+{
+  "name": "smart-chat",
+  "version": "1.0.0",
+  "description": "a content rich chat experience",
+  "main": "dist/index.js",
+  "scripts": {
+    "commit": "git-cz",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "./node_modules/.bin/eslint webpack.config.js src/**"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/apostopher/smart-chat.git"
+  },
+  "keywords": [
+    "chat"
+  ],
+  "dependencies": {
+    "bluebird": "3.3.1",
+    "ddg": "0.0.3",
+    "express": "4.13.4",
+    "lodash": "4.5.0",
+    "mongoose": "4.4.4",
+    "pusher": "1.1.0",
+    "winston": "2.1.1"
+  },
+  "devDependencies": {
+    "babel-cli": "6.5.1",
+    "babel-core": "6.4.5",
+    "babel-loader": "6.2.2",
+    "babel-preset-es2015": "6.3.13",
+    "babel-preset-stage-0": "6.3.13",
+    "clean-webpack-plugin": "0.1.8",
+    "commitizen": "2.5.0",
+    "cz-conventional-changelog": "1.1.5",
+    "debug": "2.2.0",
+    "eslint": "2.2.0",
+    "memwatch-next": "0.2.10",
+    "pre-commit": "1.1.2",
+    "source-map-support": "0.4.0",
+    "webpack": "1.12.12"
+  },
+  "author": "Rahul Devaskar",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/apostopher/smart-chat/issues"
+  },
+  "homepage": "https://github.com/apostopher/smart-chat#readme",
+  "pre-commit": [
+    "lint"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  }
+}
