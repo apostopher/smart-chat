@@ -11,6 +11,7 @@ const compress = require('compression');
 
 const config = require('./config');
 const database = require('./database');
+const realtime = require('./realtime');
 const customValidators = require('./common/data.validators');
 
 const app = express();
@@ -27,6 +28,7 @@ app.use(helmet());
 // Start database
 const server = http.createServer(app);
 database.connect().then(()=> {
+  realtime.init(server, {});
   server.listen(config.port, onStart);
 }).catch((error)=> {
   winston.error(error);
@@ -35,6 +37,6 @@ database.connect().then(()=> {
 // Implementation ---
 
 function onStart() {
-  winston.info('converse-server is listening at ' + config.port);
+  winston.info('smart-c-server is listening at ' + config.port);
 }
 
