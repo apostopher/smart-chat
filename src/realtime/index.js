@@ -3,7 +3,6 @@
 const _ = require('lodash');
 const socketIO = require('socket.io');
 const socketIORedis = require('socket.io-redis');
-const winston = require('winston');
 
 var io;
 module.exports = {
@@ -47,12 +46,11 @@ function onConnect(socket, eventHandlers) {
   // Authenticate token. 'once' is used for memory efficiency.
   // clients can authenticate once. they will have to reconnect again to authenticate.
   socket.once('authenticate', (userData) => {
-      clearTimeout(authTimeout);
-      socket.user = userData;
-      // attach event handlers provided by other modules.
-      attachEventHandlers(socket, eventHandlers);
-      socket.emit('bot message', {message: `Welcome ${userData.username}`});
-
+    clearTimeout(authTimeout);
+    socket.user = userData;
+    // attach event handlers provided by other modules.
+    attachEventHandlers(socket, eventHandlers);
+    socket.emit('bot message', {message: `Welcome ${userData.username}`});
   });
 }
 

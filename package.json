@@ -6,7 +6,7 @@
   "scripts": {
     "commit": "git-cz",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/.bin/eslint webpack.config.js src/**",
+    "lint": "./node_modules/.bin/eslint webpack.config.js src/** public/",
     "dev": "./node_modules/.bin/babel-node src/index.js"
   },
   "repository": {
@@ -18,12 +18,19 @@
   ],
   "dependencies": {
     "bluebird": "3.3.1",
+    "body-parser": "1.15.0",
+    "compression": "1.6.1",
+    "cors": "2.7.1",
     "ddg": "0.0.3",
     "express": "4.13.4",
+    "helmet": "1.1.0",
+    "hiredis": "0.4.1",
+    "ioredis": "1.15.1",
     "lodash": "4.5.0",
+    "method-override": "2.3.5",
     "mongoose": "4.4.4",
-    "socket.io": "^1.4.5",
-    "socket.io-redis": "^1.0.0",
+    "socket.io": "1.4.5",
+    "socket.io-redis": "1.0.0",
     "winston": "2.1.1"
   },
   "devDependencies": {
@@ -37,9 +44,16 @@
     "cz-conventional-changelog": "1.1.5",
     "debug": "2.2.0",
     "eslint": "2.2.0",
+    "file-loader": "0.8.5",
+    "html-webpack-plugin": "2.9.0",
     "memwatch-next": "0.2.10",
+    "node-sass": "3.4.2",
     "pre-commit": "1.1.2",
+    "raw-loader": "0.5.1",
+    "sass-loader": "3.1.2",
     "source-map-support": "0.4.0",
+    "style-loader": "0.13.0",
+    "url-loader": "0.5.7",
     "webpack": "1.12.12"
   },
   "author": "Rahul Devaskar",
