@@ -4,6 +4,8 @@
       <h2 class="app-name">Smart Chat</h2>
       <div class="chat-box">
         <div class="intro-content" ng-if="!home.username">
+          <p>This is a next-gen chat application demo. The current chat applications share static content amoung users. The next step is to add interactive content like search, purchase products within chat window, share interactive content with friends. to demo the concept, type <strong>:poll</strong> in the chat message box.</p>
+          <p>Lets's get started!</p>
           <form ng-submit="home.joinChat(user)">
             <input ng-model="user.username" placeholder="What's your nickname?" class="chat-form-message-box" style="margin-bottom: 10px;"/>
             <button type="submit" class="btn btn-block submit-new-chat-button">Join Chat</button>
