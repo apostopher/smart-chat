@@ -41,15 +41,12 @@ function init(server, eventHandlers) {
 }
 
 function onConnect(socket, eventHandlers) {
-  // Disconnect if client doesn't connect within 'timeout' value
-  const authTimeout = setTimeout(disconnectWithError, 10000, socket);
-  // Authenticate token. 'once' is used for memory efficiency.
-  // clients can authenticate once. they will have to reconnect again to authenticate.
-  socket.once('authenticate', (userData) => {
-    clearTimeout(authTimeout);
+  socket.on('authenticate', (userData) => {
     socket.user = userData;
+  
     // attach event handlers provided by other modules.
     attachEventHandlers(socket, eventHandlers);
+    socket.join(userData.room);
     socket.emit('bot message', {message: `Welcome ${userData.username}`});
   });
 }
@@ -59,13 +56,6 @@ function attachEventHandlers(socket, eventHandlers) {
     handler(socket);
   });
 }
-
-function disconnectWithError(socket, error) {
-  socket.emit('unauthorized', error ? (error.message || error) : 'authorizationTimeout', () => {
-    socket.disconnect('unauthorized');
-  });
-}
-
 
 function gracefulExit() {
   const sockets = _.get(io, 'sockets.sockets');

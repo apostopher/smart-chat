@@ -28,12 +28,12 @@ var config = {
     loaders: [
       {
         test: /\.js$/,
-        include: path.join(__dirname, 'client'),
+        include: path.join(__dirname, 's'),
         loader: 'ng-annotate!babel?' + JSON.stringify({presets: ['es2015', 'stage-0']})
       },
-      {test: /\.html$/, include: path.join(__dirname, 'client'), loader: 'raw'},
-      {test: /\.css$/, include: path.join(__dirname, 'client'), loader: 'style!css'},
-      {test: /\.scss$/, include: path.join(__dirname, 'client'), loader: 'style!css!sass'},
+      {test: /\.html$/, include: path.join(__dirname, 'src'), loader: 'raw'},
+      {test: /\.css$/, include: path.join(__dirname, 'src'), loader: 'style!css'},
+      {test: /\.scss$/, include: path.join(__dirname, 'src'), loader: 'style!css!sass'},
       {test: /\.(png|jpg|svg)$/, loader: 'url-loader?limit=8192'}
     ]
   },

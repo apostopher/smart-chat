@@ -1,8 +1,10 @@
 'use strict';
-
+const _ = require('lodash');
+const winston = require('winston');
 const redisSub = require('../common/redis.store').sub;
 const redis = require('../common/redis.store').pub;
-const config = require('./config')
+const config = require('./config');
+const Chat = require('./chat.model');
 
 redisSub.subscribe(config.keyExpiredChannel).then(()=> {
   redis.on('message', removeSocketFromRoom);
@@ -25,7 +27,7 @@ function removeSocketFromRoom(channel, key) {
   const socket = realtime.getSocketById(socketId);
   if (socket) {
     // socket is still connected.
-    socket.leave(room);
+    //socket.leave(room);
   }
 }
 
@@ -47,8 +49,13 @@ function onLeave(socket, {room}) {
 
 function onMessage(socket, {room, message}) {
   return redis.set(`${config.keyPrefix}:${socket.id}:${room}`, 1, 'ex', config.expiresIn).then(()=>{
-    socket.broadcast.to(room).emit('chat message', {message, username: _.get(socket, 'user.username', '')});
+    const username = _.get(socket, 'user.username', '');
+    const chatMessage = new Chat({from: username, data: {message}});
+    return chatMessage.saveAsync().then(()=>{
+      socket.broadcast.to(room).emit('chat message', {message, username});
+    });
   }).catch((error) => {
+    winston.error(error);
     socket.emit('chat error', error);
   });
 }

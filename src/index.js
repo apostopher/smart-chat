@@ -26,6 +26,8 @@ app.use(methodOverride());
 app.use(compress());
 app.use(helmet());
 
+//app.use('/poll', require('./poll'));
+
 // serve web app
 app.get('/', function(req, res) {
 	res.sendFile(`${webAppLocation}/index.html`);
@@ -39,7 +41,7 @@ app.get('*', function(req, res) {
 const server = http.createServer(app);
 database.connect().then(()=> {
   // Initialize realtime module
-  realtime.init(server, require('./chat'));
+  realtime.init(server, [require('./chat')]);
   // start the server
   server.listen(config.port, onStart);
 }).catch((error)=> {

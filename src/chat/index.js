@@ -8,6 +8,7 @@ module.exports = chatHandler;
 
 // Implementation ---
 function chatHandler(socket) {
+  
   const username = _.get(socket, 'user.username');
   socket.on('join room', (payload)=> chatService.onJoin(socket, payload));
   socket.on('leave room', (payload)=> chatService.onLeave(socket, payload));
