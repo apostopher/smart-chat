@@ -5,6 +5,7 @@ const redisSub = require('../common/redis.store').sub;
 const redis = require('../common/redis.store').pub;
 const config = require('./config');
 const Chat = require('./chat.model');
+const realtime = require('../realtime')
 
 redisSub.subscribe(config.keyExpiredChannel).then(()=> {
   redis.on('message', removeSocketFromRoom);
@@ -47,12 +48,17 @@ function onLeave(socket, {room}) {
   });
 }
 
-function onMessage(socket, {room, message}) {
+function onMessage(socket, {room, message, type}) {
   return redis.set(`${config.keyPrefix}:${socket.id}:${room}`, 1, 'ex', config.expiresIn).then(()=>{
     const username = _.get(socket, 'user.username', '');
-    const chatMessage = new Chat({from: username, data: {message}});
+    let chatSpec = {from: username, data: message};
+    if(type) {
+      chatSpec.messageType = type;
+    }
+    const chatMessage = new Chat(chatSpec);
     return chatMessage.saveAsync().then(()=>{
-      socket.broadcast.to(room).emit('chat message', {message, username});
+      socket.broadcast.to(room).emit('chat message', chatMessage);
+      socket.emit('chat message', chatMessage);
     });
   }).catch((error) => {
     winston.error(error);

@@ -1,3 +1,102 @@
 body {
   background: #f8f8f8;
+  font-family: 'Open Sans', 'lucida grande', 'Segoe UI', arial;
+  padding-bottom: 80p;
+}
+
+.app-name {
+  text-align: center;
+  font-weight: 300;
+}
+.chat-box {
+  background: white;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 4px rgba(0,0,0,.05);
+}
+
+.chat-content, .intro-content {
+  padding: 10px;
+  min-height: 500px;
+  height: 500px;
+}
+
+.poll-content {
+  border: 1px solid #ddd;
+  background: #fafafa;
+  border-radius: 3px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.05);
+  margin: 10px 20px;
+  padding: 10px;
+}
+
+.chat-form-holder {
+  padding: 10px;
+  background: #fafafa;
+  border-top: 1px solid #ddd;
+}
+
+.chat-form-message-box {
+  width: 100%;
+  display: block;
+  resize: none;
+  box-shadow: none;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-size: 13px;
+  background: #fff;
+  height: 32px;
+  min-height: 32px;
+  transition: border-color .3s ease-out;
+  margin-bottom: 0;
+}
+
+.chat-form-message-box:active, .chat-form-message-box:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.submit-new-chat-button {
+  background: #1565c0;
+  background: linear-gradient(to bottom,#1e88e5 0,#1565c0 100%);
+  border: 1px solid #0d47a1;
+  color: #fff;
+  text-shadow: 0 0 1px rgba(0,0,0,.3);
+  font-size: 14px;
+  font-weight: 400;
+  outline: none;
+  margin-right: 0;
+}
+
+.submit-new-chat-button:hover {
+  color: white;
+  background: #1565c0;
+  background: linear-gradient(to bottom,#2196f3 0,#1976d2 100%);
+}
+
+.chat-message-holder {
+  padding: 5px 0;
+}
+
+.chat-nickname {
+  margin-right: 10px;
+  font-weight: 600;
+  color: #1565c0;
+}
+
+.poll-qn-option {
+  cursor: pointer;
+  background: white;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  font-weight: 600;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+.poll-stat {
+  display: block;
+  font-size: 12px;
+  color: #666;
 }

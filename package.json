@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "angular": "1.5.0",
+    "angular-elastic": "2.5.1",
     "angular-moment": "1.0.0-beta.4",
     "angular-ui-router": "0.2.18",
     "angularjs-scroll-glue": "2.0.4",

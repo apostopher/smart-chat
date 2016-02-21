@@ -18,6 +18,7 @@ module.exports = function (ngModule) {
     function init() {
       socket = $window.io();
       socket.on('chat message', messageHandler('chat message'));
+      socket.on('poll response', messageHandler('chat message'));
       socket.on('bot message', messageHandler('bot message'));
     }
 

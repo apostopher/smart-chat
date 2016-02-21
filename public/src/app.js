@@ -5,11 +5,13 @@ require('moment');
 require('angular-moment');
 require('moment-countdown');
 require('angularjs-scroll-glue');
+require('angular-elastic');
 
 const ngModule = angular.module('smartchat', [
   'ui.router',
   'angularMoment',
-  'luegg.directives'
+  'luegg.directives',
+  'monospaced.elastic'
 ]);
 
 /* @ngInject */

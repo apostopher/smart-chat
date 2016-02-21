@@ -9,7 +9,8 @@ module.exports = {
   getIo,
   init,
   getSocketById,
-  getSocketByUsername
+  getSocketByUsername,
+  broadcastMessage
 };
 
 // Implementation ---
@@ -17,6 +18,10 @@ process.on('SIGTERM', gracefulExit).on('SIGINT', gracefulExit);
 
 function getIo() {
   return io;
+}
+
+function broadcastMessage(event, data) {
+  io.to('hacksumm').emit(event, data);
 }
 
 function getSocketById(socketId) {
@@ -43,7 +48,7 @@ function init(server, eventHandlers) {
 function onConnect(socket, eventHandlers) {
   socket.on('authenticate', (userData) => {
     socket.user = userData;
-  
+
     // attach event handlers provided by other modules.
     attachEventHandlers(socket, eventHandlers);
     socket.join(userData.room);

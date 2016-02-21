@@ -26,7 +26,8 @@ app.use(methodOverride());
 app.use(compress());
 app.use(helmet());
 
-//app.use('/poll', require('./poll'));
+app.use('/api/chat', require('./chat/api'));
+app.use('/api/poll', require('./poll'));
 
 // serve web app
 app.get('/', function(req, res) {

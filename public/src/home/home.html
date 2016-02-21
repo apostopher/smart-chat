@@ -1,7 +1,64 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <h4>Smart Chat</h4>
+    <div class="col-md-6 col-md-offset-3">
+      <h2 class="app-name">Smart Chat</h2>
+      <div class="chat-box">
+        <div class="intro-content" ng-if="!home.username">
+          <form ng-submit="home.joinChat(user)">
+            <input ng-model="user.username" placeholder="What's your nickname?" class="chat-form-message-box" style="margin-bottom: 10px;"/>
+            <button type="submit" class="btn btn-block submit-new-chat-button">Join Chat</button>
+          </form>
+        </div>
+        <div class="chat-content" ng-if="home.username">
+          <div ng-repeat="chat in home.chats">
+            <div ng-if="chat.messageType === 'chat'" class="chat-message-holder">
+              <span class="chat-nickname" ng-bind="chat.from + ': '"></span>
+              <span class="chat-message" ng-bind="chat.data"></span>
+            </div>
+            <div ng-if="chat.messageType === 'poll'">
+            <span class="chat-nickname" ng-bind="chat.from + ': '"></span>
+              <div class="poll-content">
+                <div ng-repeat="(key, val) in chat.data">
+                  <div class="poll-qn-option" ng-click="home.castVote(chat._id, key)">
+                    <p ng-bind="val.qn" class="poll-qn"></p>
+                    <p ng-bind="val.ans.length > 1 ? val.ans.length + ' people voted.': '1 person voted.'" ng-if="val.ans.length" class="poll-stat"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="poll-content" ng-if="home.showPoll">
+          <a href="javascript:void(0)" ng-click="home.removePoll()" style="float:right">x</a>
+          <h5 class="feed-form-section-title">Add a poll</h5>
+          <form ng-submit="home.submitPoll(home.pollData)">
+            <div class="poll-question-holder" ng-repeat="idx in home.choices">
+            <div class="row">
+              <div class="col-md-12">
+                <input type="text" placeholder="choice {{ idx }}" class="chat-form-message-box" style="margin-bottom: 5px;" ng-model="home.pollData.options[$index]">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 col-md-offset-9">
+              <button type="submit" class="btn btn-block submit-new-chat-button">Add poll</button>
+            </div>
+          </div>
+          </form>
+        </div>
+        <div class="chat-form-holder" ng-if="home.username">
+          <form ng-submit="home.postChatmessage(newChat)" accept-charset="utf-8">
+            <div class="row">
+            <div class="col-md-10">
+              <textarea msd-elastic="" ng-model="newChat.text" rows="1" placeholder="What's on your mind" class="chat-form-message-box"></textarea>
+            </div>
+            <div class="col-md-2">
+              <button type="submit" class="btn btn-block submit-new-chat-button">Send</button>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>

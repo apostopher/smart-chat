@@ -13,7 +13,8 @@ Bluebird.promisifyAll(mongoose.Model.prototype);
 const chatSchema = new Schema({
   from: {type: String, required: true, index: true, lowercase: true},
   messageType: {type: String, required: true, default: 'chat'},
-  data: {}
+  data: {},
+  createdAt: {type: Date, default: Date.now}
 });
 
 module.exports = mongoose.model('Chat', chatSchema);
